@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JMaster | Minimal Utility Suite</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Header with Brand Logo -->
+  <header>
+    <div class="brand">
+      <img src="logo.png" alt="JMaster Logo" class="brand-logo" id="mainLogo">
+      <span class="brand-name">JMaster</span>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <!-- Hero About Section (Centered) -->
+    <section class="about-hero">
+      <div class="logo-wrapper">
+        <img src="logo.png" alt="JMaster Logo" class="hero-logo">
+      </div>
+      <h1>Welcome to JMaster</h1>
+      <p class="tagline">An all-in-one minimal workspace for your daily digital workflows. Extract text, clean data, refine writing, format equations, and build tables instantly.</p>
+    </section>
+
+    <!-- Tools Navigation Grid (Centered) -->
+    <section class="tools-grid">
+      
+      <!-- Card 1: PDF to Text -->
+      <div class="tool-card" onclick="openTool('pdf')">
+        <div class="card-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+        </div>
+        <h3>PDF to Text</h3>
+        <p>Extract raw readable text from PDF documents instantly.</p>
+      </div>
+
+      <!-- Card 2: BG Remover -->
+      <div class="tool-card" onclick="openTool('bg-remove')">
+        <div class="card-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+        </div>
+        <h3>BG Remover</h3>
+        <p>Remove backgrounds from product images & photos.</p>
+      </div>
+
+      <!-- Card 3: Grammar Checker -->
+      <div class="tool-card" onclick="openTool('grammar')">
+        <div class="card-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+        </div>
+        <h3>Grammar Checker</h3>
+        <p>Fix spelling, grammar, and tone using AI.</p>
+      </div>
+
+      <!-- Card 4: Data Cleanup -->
+      <div class="tool-card" onclick="openTool('cleanup')">
+        <div class="card-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+        </div>
+        <h3>Data Cleanup</h3>
+        <p>Deduplicate items and strip blank lines automatically.</p>
+      </div>
+
+      <!-- Card 5: Table Builder -->
+      <div class="tool-card" onclick="openTool('table')">
+        <div class="card-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"></path></svg>
+        </div>
+        <h3>Table Builder</h3>
+        <p>Design custom tables and export clean HTML.</p>
+      </div>
+
+      <!-- Card 6: Word Math AI -->
+      <div class="tool-card" onclick="openTool('equation')">
+        <div class="card-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="4" y1="9" x2="20" y2="9"></line><line x1="4" y1="15" x2="20" y2="15"></line><line x1="10" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="14" y2="21"></line></svg>
+        </div>
+        <h3>Word Math AI</h3>
+        <p>Convert LaTeX into copy-pasteable MS Word equations.</p>
+      </div>
+
+    </section>
+
+    <!-- Workspace Container (Opens selected tool) -->
+    <div id="workspace" class="workspace hidden">
+      <div class="workspace-header">
+        <button class="back-btn" onclick="closeWorkspace()">← Back to Dashboard</button>
+      </div>
+
+      <!-- PDF Tool -->
+      <section id="pdf" class="tool-content">
+        <h2>PDF to Text</h2>
+        <input type="file" id="pdfFile" accept="application/pdf">
+        <button onclick="convertPdf()">Extract Text</button>
+        <textarea id="pdfResult" readonly placeholder="Extracted text will appear here..."></textarea>
+      </section>
+
+      <!-- BG Remover Tool -->
+      <section id="bg-remove" class="tool-content">
+        <h2>Background Remover</h2>
+        <input type="file" id="bgFile" accept="image/*">
+        <button onclick="removeBg()">Remove Background</button>
+        <div id="bgResult"></div>
+      </section>
+
+      <!-- Grammar Tool -->
+      <section id="grammar" class="tool-content">
+        <h2>Grammar Checker</h2>
+        <textarea id="grammarInput" placeholder="Paste your text here..."></textarea>
+        <button onclick="checkGrammar()">Fix Grammar</button>
+        <textarea id="grammarResult" readonly placeholder="Corrected text..."></textarea>
+      </section>
+
+      <!-- Data Cleanup Tool -->
+      <section id="cleanup" class="tool-content">
+        <h2>Data Cleanup</h2>
+        <textarea id="dataInput" placeholder="Paste unorganized list here..."></textarea>
+        <button onclick="cleanData()">Clean Data</button>
+        <textarea id="dataResult" readonly placeholder="Cleaned output..."></textarea>
+      </section>
+
+      <!-- Table Builder Tool -->
+      <section id="table" class="tool-content">
+        <h2>Table Builder</h2>
+        <div class="controls">
+          <button onclick="addRow()">+ Add Row</button>
+          <button onclick="addColumn()">+ Add Column</button>
+          <button onclick="copyTableHTML()">Copy HTML</button>
+        </div>
+        <div class="table-container">
+          <table id="customTable">
+            <thead>
+              <tr><th contenteditable="true">Header 1</th><th contenteditable="true">Header 2</th></tr>
+            </thead>
+            <tbody>
+              <tr><td contenteditable="true">Data 1</td><td contenteditable="true">Data 2</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Word Math Tool -->
+      <section id="equation" class="tool-content">
+        <h2>AI Equation to Word Math</h2>
+        <p class="hint">Type LaTeX math (e.g., \frac{-b \pm \sqrt{b^2 - 4ac}}{2a})</p>
+        <textarea id="eqInput" placeholder="Enter equation..."></textarea>
+        <button onclick="convertEquation()">Format for MS Word</button>
+        <textarea id="eqResult" readonly placeholder="Word Math format..."></textarea>
+        <button onclick="copyToClipboard('eqResult')">Copy to Clipboard</button>
+      </section>
+
+    </div>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
